@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CCTV Face Enhancement Report</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: #f3f4f6;
+    }
+    .page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .summary {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .summary h1 {
+      margin: 0 0 12px;
+      font-size: 28px;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .summary-item {
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .header {
+      padding: 14px 16px;
+      font-weight: 700;
+      border-bottom: 1px solid #374151;
+    }
+    .images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 16px;
+    }
+    figure {
+      margin: 0;
+      text-align: center;
+    }
+    img {
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid #4b5563;
+      background: #000;
+    }
+    figcaption {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+    .stats {
+      padding: 0 16px 16px;
+      display: grid;
+      gap: 8px;
+      color: #d1d5db;
+    }
+    strong {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="summary">
+      <h1>Low-Resolution CCTV Face Enhancement Report</h1>
+      <div class="summary-grid">
+        <div class="summary-item"><strong>Total Faces</strong><br>100</div>
+        <div class="summary-item"><strong>Recognition</strong><br>68.0% -> 59.0%</div>
+        <div class="summary-item"><strong>Sharpness</strong><br>112.70 -> 70.70</div>
+        <div class="summary-item"><strong>Sharpness Gain</strong><br>-42.00</div>
+      </div>
+    </section>
+    <section class="grid">
+      
+            <div class="card">
+              <div class="header">face_000.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_000.jpg" alt="raw face_000.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_000.jpg" alt="enhanced face_000.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 115.31 -> 25.59</div>
+                <div><strong>SSIM:</strong> 0.7173</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_001.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_001.jpg" alt="raw face_001.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_001.jpg" alt="enhanced face_001.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 74.68 -> 19.21</div>
+                <div><strong>SSIM:</strong> 0.7399</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_002.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_002.jpg" alt="raw face_002.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_002.jpg" alt="enhanced face_002.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 124.03 -> 112.31</div>
+                <div><strong>SSIM:</strong> 0.6659</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_003.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_003.jpg" alt="raw face_003.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_003.jpg" alt="enhanced face_003.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 105.59 -> 25.31</div>
+                <div><strong>SSIM:</strong> 0.7464</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_004.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_004.jpg" alt="raw face_004.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_004.jpg" alt="enhanced face_004.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 178.33 -> 25.78</div>
+                <div><strong>SSIM:</strong> 0.7756</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_005.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_005.jpg" alt="raw face_005.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_005.jpg" alt="enhanced face_005.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 131.87 -> 70.8</div>
+                <div><strong>SSIM:</strong> 0.6008</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_006.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_006.jpg" alt="raw face_006.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_006.jpg" alt="enhanced face_006.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 156.94 -> 57.65</div>
+                <div><strong>SSIM:</strong> 0.6581</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Anamika</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_007.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_007.jpg" alt="raw face_007.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_007.jpg" alt="enhanced face_007.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 182.38 -> 81.51</div>
+                <div><strong>SSIM:</strong> 0.7465</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_008.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_008.jpg" alt="raw face_008.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_008.jpg" alt="enhanced face_008.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 89.45 -> 49.03</div>
+                <div><strong>SSIM:</strong> 0.6316</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Mohini</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_009.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_009.jpg" alt="raw face_009.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_009.jpg" alt="enhanced face_009.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 98.39 -> 60.38</div>
+                <div><strong>SSIM:</strong> 0.7075</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_010.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_010.jpg" alt="raw face_010.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_010.jpg" alt="enhanced face_010.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 85.26 -> 22.91</div>
+                <div><strong>SSIM:</strong> 0.742</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_011.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_011.jpg" alt="raw face_011.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_011.jpg" alt="enhanced face_011.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 104.14 -> 24.35</div>
+                <div><strong>SSIM:</strong> 0.7156</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_012.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_012.jpg" alt="raw face_012.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_012.jpg" alt="enhanced face_012.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 64.21 -> 17.22</div>
+                <div><strong>SSIM:</strong> 0.7204</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_013.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_013.jpg" alt="raw face_013.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_013.jpg" alt="enhanced face_013.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 94.14 -> 26.97</div>
+                <div><strong>SSIM:</strong> 0.7461</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Manav</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_014.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_014.jpg" alt="raw face_014.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_014.jpg" alt="enhanced face_014.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 119.29 -> 105.95</div>
+                <div><strong>SSIM:</strong> 0.6664</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_015.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_015.jpg" alt="raw face_015.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_015.jpg" alt="enhanced face_015.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 124.42 -> 53.47</div>
+                <div><strong>SSIM:</strong> 0.5908</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_016.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_016.jpg" alt="raw face_016.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_016.jpg" alt="enhanced face_016.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 375.76 -> 25.86</div>
+                <div><strong>SSIM:</strong> 0.8395</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_017.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_017.jpg" alt="raw face_017.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_017.jpg" alt="enhanced face_017.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 86.19 -> 60.22</div>
+                <div><strong>SSIM:</strong> 0.6655</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_018.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_018.jpg" alt="raw face_018.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_018.jpg" alt="enhanced face_018.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 95.76 -> 76.32</div>
+                <div><strong>SSIM:</strong> 0.6822</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_019.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_019.jpg" alt="raw face_019.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_019.jpg" alt="enhanced face_019.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 66.43 -> 18.9</div>
+                <div><strong>SSIM:</strong> 0.7081</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_020.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_020.jpg" alt="raw face_020.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_020.jpg" alt="enhanced face_020.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 94.61 -> 21.95</div>
+                <div><strong>SSIM:</strong> 0.733</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_021.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_021.jpg" alt="raw face_021.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_021.jpg" alt="enhanced face_021.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 78.93 -> 21.22</div>
+                <div><strong>SSIM:</strong> 0.7304</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_022.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_022.jpg" alt="raw face_022.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_022.jpg" alt="enhanced face_022.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 158.36 -> 55.41</div>
+                <div><strong>SSIM:</strong> 0.6508</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Anamika</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_023.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_023.jpg" alt="raw face_023.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_023.jpg" alt="enhanced face_023.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 100.41 -> 31.25</div>
+                <div><strong>SSIM:</strong> 0.7501</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Jahanvi</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_024.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_024.jpg" alt="raw face_024.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_024.jpg" alt="enhanced face_024.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 128.77 -> 111.69</div>
+                <div><strong>SSIM:</strong> 0.6677</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_025.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_025.jpg" alt="raw face_025.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_025.jpg" alt="enhanced face_025.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 59.12 -> 38.07</div>
+                <div><strong>SSIM:</strong> 0.6165</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Anamika</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_026.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_026.jpg" alt="raw face_026.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_026.jpg" alt="enhanced face_026.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 105.73 -> 92.9</div>
+                <div><strong>SSIM:</strong> 0.6323</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Ranjhana</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_027.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_027.jpg" alt="raw face_027.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_027.jpg" alt="enhanced face_027.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 100.59 -> 87.28</div>
+                <div><strong>SSIM:</strong> 0.674</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_028.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_028.jpg" alt="raw face_028.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_028.jpg" alt="enhanced face_028.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 47.32 -> 18.54</div>
+                <div><strong>SSIM:</strong> 0.718</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_029.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_029.jpg" alt="raw face_029.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_029.jpg" alt="enhanced face_029.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 99.16 -> 19.02</div>
+                <div><strong>SSIM:</strong> 0.7171</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_030.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_030.jpg" alt="raw face_030.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_030.jpg" alt="enhanced face_030.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 130.92 -> 115.58</div>
+                <div><strong>SSIM:</strong> 0.6598</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_031.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_031.jpg" alt="raw face_031.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_031.jpg" alt="enhanced face_031.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 98.08 -> 26.83</div>
+                <div><strong>SSIM:</strong> 0.7549</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Ranjhana</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_032.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_032.jpg" alt="raw face_032.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_032.jpg" alt="enhanced face_032.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 147.2 -> 24.98</div>
+                <div><strong>SSIM:</strong> 0.7974</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Jahanvi</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_033.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_033.jpg" alt="raw face_033.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_033.jpg" alt="enhanced face_033.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 69.28 -> 43.73</div>
+                <div><strong>SSIM:</strong> 0.6057</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Anamika</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_034.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_034.jpg" alt="raw face_034.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_034.jpg" alt="enhanced face_034.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 151.17 -> 50.86</div>
+                <div><strong>SSIM:</strong> 0.6561</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Anamika</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_035.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_035.jpg" alt="raw face_035.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_035.jpg" alt="enhanced face_035.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 57.77 -> 35.66</div>
+                <div><strong>SSIM:</strong> 0.6478</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Anamika</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_036.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_036.jpg" alt="raw face_036.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_036.jpg" alt="enhanced face_036.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 77.35 -> 75.1</div>
+                <div><strong>SSIM:</strong> 0.6346</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_037.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_037.jpg" alt="raw face_037.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_037.jpg" alt="enhanced face_037.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 150.09 -> 278.65</div>
+                <div><strong>SSIM:</strong> 0.6285</div>
+                <div><strong>Match:</strong> False -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_038.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_038.jpg" alt="raw face_038.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_038.jpg" alt="enhanced face_038.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 56.12 -> 14.61</div>
+                <div><strong>SSIM:</strong> 0.7396</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_039.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_039.jpg" alt="raw face_039.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_039.jpg" alt="enhanced face_039.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 89.28 -> 21.45</div>
+                <div><strong>SSIM:</strong> 0.6927</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_040.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_040.jpg" alt="raw face_040.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_040.jpg" alt="enhanced face_040.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 113.92 -> 17.3</div>
+                <div><strong>SSIM:</strong> 0.7225</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_041.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_041.jpg" alt="raw face_041.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_041.jpg" alt="enhanced face_041.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 544.63 -> 541.26</div>
+                <div><strong>SSIM:</strong> 0.8606</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_042.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_042.jpg" alt="raw face_042.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_042.jpg" alt="enhanced face_042.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 66.17 -> 66.85</div>
+                <div><strong>SSIM:</strong> 0.6365</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_043.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_043.jpg" alt="raw face_043.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_043.jpg" alt="enhanced face_043.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 55.42 -> 34.0</div>
+                <div><strong>SSIM:</strong> 0.6354</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Anamika</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_044.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_044.jpg" alt="raw face_044.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_044.jpg" alt="enhanced face_044.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 93.4 -> 27.81</div>
+                <div><strong>SSIM:</strong> 0.7555</div>
+                <div><strong>Match:</strong> False -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_045.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_045.jpg" alt="raw face_045.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_045.jpg" alt="enhanced face_045.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 133.3 -> 113.8</div>
+                <div><strong>SSIM:</strong> 0.6624</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_046.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_046.jpg" alt="raw face_046.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_046.jpg" alt="enhanced face_046.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 64.39 -> 57.04</div>
+                <div><strong>SSIM:</strong> 0.6805</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_047.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_047.jpg" alt="raw face_047.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_047.jpg" alt="enhanced face_047.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 55.18 -> 16.53</div>
+                <div><strong>SSIM:</strong> 0.7304</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_048.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_048.jpg" alt="raw face_048.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_048.jpg" alt="enhanced face_048.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 76.73 -> 35.51</div>
+                <div><strong>SSIM:</strong> 0.6672</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_049.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_049.jpg" alt="raw face_049.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_049.jpg" alt="enhanced face_049.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 74.99 -> 49.11</div>
+                <div><strong>SSIM:</strong> 0.6109</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Mohini</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_050.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_050.jpg" alt="raw face_050.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_050.jpg" alt="enhanced face_050.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 64.55 -> 70.97</div>
+                <div><strong>SSIM:</strong> 0.6512</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_051.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_051.jpg" alt="raw face_051.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_051.jpg" alt="enhanced face_051.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 134.34 -> 109.12</div>
+                <div><strong>SSIM:</strong> 0.6696</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_052.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_052.jpg" alt="raw face_052.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_052.jpg" alt="enhanced face_052.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 152.44 -> 61.9</div>
+                <div><strong>SSIM:</strong> 0.6531</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Anamika</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_053.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_053.jpg" alt="raw face_053.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_053.jpg" alt="enhanced face_053.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 78.86 -> 60.65</div>
+                <div><strong>SSIM:</strong> 0.6871</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_054.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_054.jpg" alt="raw face_054.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_054.jpg" alt="enhanced face_054.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 58.36 -> 16.04</div>
+                <div><strong>SSIM:</strong> 0.7265</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_055.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_055.jpg" alt="raw face_055.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_055.jpg" alt="enhanced face_055.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 96.81 -> 26.45</div>
+                <div><strong>SSIM:</strong> 0.714</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_056.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_056.jpg" alt="raw face_056.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_056.jpg" alt="enhanced face_056.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 53.49 -> 33.9</div>
+                <div><strong>SSIM:</strong> 0.6557</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_057.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_057.jpg" alt="raw face_057.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_057.jpg" alt="enhanced face_057.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 136.59 -> 110.41</div>
+                <div><strong>SSIM:</strong> 0.6665</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_058.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_058.jpg" alt="raw face_058.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_058.jpg" alt="enhanced face_058.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 97.68 -> 19.7</div>
+                <div><strong>SSIM:</strong> 0.7225</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_059.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_059.jpg" alt="raw face_059.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_059.jpg" alt="enhanced face_059.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 154.65 -> 66.93</div>
+                <div><strong>SSIM:</strong> 0.6553</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Anamika</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_060.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_060.jpg" alt="raw face_060.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_060.jpg" alt="enhanced face_060.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 63.52 -> 43.37</div>
+                <div><strong>SSIM:</strong> 0.6213</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_061.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_061.jpg" alt="raw face_061.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_061.jpg" alt="enhanced face_061.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 76.92 -> 60.55</div>
+                <div><strong>SSIM:</strong> 0.639</div>
+                <div><strong>Match:</strong> False -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_062.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_062.jpg" alt="raw face_062.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_062.jpg" alt="enhanced face_062.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 73.28 -> 53.64</div>
+                <div><strong>SSIM:</strong> 0.6108</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_063.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_063.jpg" alt="raw face_063.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_063.jpg" alt="enhanced face_063.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 82.09 -> 81.65</div>
+                <div><strong>SSIM:</strong> 0.68</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_064.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_064.jpg" alt="raw face_064.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_064.jpg" alt="enhanced face_064.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 56.57 -> 18.76</div>
+                <div><strong>SSIM:</strong> 0.7356</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_065.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_065.jpg" alt="raw face_065.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_065.jpg" alt="enhanced face_065.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 161.7 -> 28.98</div>
+                <div><strong>SSIM:</strong> 0.7664</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_066.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_066.jpg" alt="raw face_066.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_066.jpg" alt="enhanced face_066.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 90.64 -> 19.94</div>
+                <div><strong>SSIM:</strong> 0.7357</div>
+                <div><strong>Match:</strong> False -> True</div>
+                <div><strong>Identity:</strong> Ranjhana</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_067.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_067.jpg" alt="raw face_067.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_067.jpg" alt="enhanced face_067.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 57.58 -> 35.29</div>
+                <div><strong>SSIM:</strong> 0.6746</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_068.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_068.jpg" alt="raw face_068.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_068.jpg" alt="enhanced face_068.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 67.69 -> 44.27</div>
+                <div><strong>SSIM:</strong> 0.6245</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_069.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_069.jpg" alt="raw face_069.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_069.jpg" alt="enhanced face_069.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 138.78 -> 102.89</div>
+                <div><strong>SSIM:</strong> 0.6628</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_070.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_070.jpg" alt="raw face_070.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_070.jpg" alt="enhanced face_070.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 146.11 -> 40.4</div>
+                <div><strong>SSIM:</strong> 0.6502</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_071.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_071.jpg" alt="raw face_071.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_071.jpg" alt="enhanced face_071.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 79.07 -> 67.13</div>
+                <div><strong>SSIM:</strong> 0.6287</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Ranjhana</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_072.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_072.jpg" alt="raw face_072.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_072.jpg" alt="enhanced face_072.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 92.07 -> 86.9</div>
+                <div><strong>SSIM:</strong> 0.6623</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Ranjhana</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_073.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_073.jpg" alt="raw face_073.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_073.jpg" alt="enhanced face_073.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 187.69 -> 18.99</div>
+                <div><strong>SSIM:</strong> 0.7957</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_074.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_074.jpg" alt="raw face_074.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_074.jpg" alt="enhanced face_074.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 92.68 -> 24.86</div>
+                <div><strong>SSIM:</strong> 0.6951</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_075.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_075.jpg" alt="raw face_075.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_075.jpg" alt="enhanced face_075.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 61.42 -> 18.17</div>
+                <div><strong>SSIM:</strong> 0.7342</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_076.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_076.jpg" alt="raw face_076.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_076.jpg" alt="enhanced face_076.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 60.48 -> 36.25</div>
+                <div><strong>SSIM:</strong> 0.6574</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_077.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_077.jpg" alt="raw face_077.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_077.jpg" alt="enhanced face_077.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 91.96 -> 21.06</div>
+                <div><strong>SSIM:</strong> 0.6749</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_078.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_078.jpg" alt="raw face_078.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_078.jpg" alt="enhanced face_078.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 54.68 -> 49.72</div>
+                <div><strong>SSIM:</strong> 0.6183</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_079.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_079.jpg" alt="raw face_079.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_079.jpg" alt="enhanced face_079.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 58.95 -> 38.27</div>
+                <div><strong>SSIM:</strong> 0.636</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Mohini</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_080.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_080.jpg" alt="raw face_080.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_080.jpg" alt="enhanced face_080.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 160.39 -> 67.4</div>
+                <div><strong>SSIM:</strong> 0.658</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Anamika</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_081.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_081.jpg" alt="raw face_081.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_081.jpg" alt="enhanced face_081.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 85.64 -> 67.98</div>
+                <div><strong>SSIM:</strong> 0.6609</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Harshita</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_082.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_082.jpg" alt="raw face_082.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_082.jpg" alt="enhanced face_082.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 57.15 -> 17.92</div>
+                <div><strong>SSIM:</strong> 0.7378</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_083.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_083.jpg" alt="raw face_083.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_083.jpg" alt="enhanced face_083.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 93.27 -> 22.97</div>
+                <div><strong>SSIM:</strong> 0.7214</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_084.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_084.jpg" alt="raw face_084.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_084.jpg" alt="enhanced face_084.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 96.48 -> 22.01</div>
+                <div><strong>SSIM:</strong> 0.695</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_085.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_085.jpg" alt="raw face_085.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_085.jpg" alt="enhanced face_085.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 530.96 -> 582.16</div>
+                <div><strong>SSIM:</strong> 0.8557</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_086.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_086.jpg" alt="raw face_086.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_086.jpg" alt="enhanced face_086.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 70.12 -> 49.59</div>
+                <div><strong>SSIM:</strong> 0.6255</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Mohini</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_087.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_087.jpg" alt="raw face_087.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_087.jpg" alt="enhanced face_087.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 60.2 -> 36.72</div>
+                <div><strong>SSIM:</strong> 0.6758</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Ranjhana</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_088.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_088.jpg" alt="raw face_088.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_088.jpg" alt="enhanced face_088.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 148.51 -> 61.47</div>
+                <div><strong>SSIM:</strong> 0.6706</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Anamika</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_089.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_089.jpg" alt="raw face_089.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_089.jpg" alt="enhanced face_089.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 95.36 -> 139.26</div>
+                <div><strong>SSIM:</strong> 0.7733</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_090.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_090.jpg" alt="raw face_090.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_090.jpg" alt="enhanced face_090.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 75.13 -> 59.72</div>
+                <div><strong>SSIM:</strong> 0.6793</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_091.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_091.jpg" alt="raw face_091.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_091.jpg" alt="enhanced face_091.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 53.42 -> 50.61</div>
+                <div><strong>SSIM:</strong> 0.6221</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Mohini</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_092.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_092.jpg" alt="raw face_092.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_092.jpg" alt="enhanced face_092.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 58.6 -> 18.17</div>
+                <div><strong>SSIM:</strong> 0.7346</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_093.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_093.jpg" alt="raw face_093.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_093.jpg" alt="enhanced face_093.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 533.13 -> 820.59</div>
+                <div><strong>SSIM:</strong> 0.859</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_094.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_094.jpg" alt="raw face_094.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_094.jpg" alt="enhanced face_094.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 115.55 -> 18.22</div>
+                <div><strong>SSIM:</strong> 0.7291</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_095.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_095.jpg" alt="raw face_095.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_095.jpg" alt="enhanced face_095.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 140.63 -> 110.83</div>
+                <div><strong>SSIM:</strong> 0.6674</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> AARAV</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_096.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_096.jpg" alt="raw face_096.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_096.jpg" alt="enhanced face_096.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 56.67 -> 39.01</div>
+                <div><strong>SSIM:</strong> 0.6387</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Ranjhana</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_097.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_097.jpg" alt="raw face_097.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_097.jpg" alt="enhanced face_097.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 59.73 -> 33.13</div>
+                <div><strong>SSIM:</strong> 0.6604</div>
+                <div><strong>Match:</strong> True -> True</div>
+                <div><strong>Identity:</strong> Jahanvi</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_098.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_098.jpg" alt="raw face_098.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_098.jpg" alt="enhanced face_098.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 115.88 -> 193.28</div>
+                <div><strong>SSIM:</strong> 0.7372</div>
+                <div><strong>Match:</strong> False -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="header">face_099.jpg</div>
+              <div class="images">
+                <figure>
+                  <img src="raw_faces/face_099.jpg" alt="raw face_099.jpg" loading="lazy">
+                  <figcaption>Original</figcaption>
+                </figure>
+                <figure>
+                  <img src="enhanced_faces/face_099.jpg" alt="enhanced face_099.jpg" loading="lazy">
+                  <figcaption>Enhanced</figcaption>
+                </figure>
+              </div>
+              <div class="stats">
+                <div><strong>Sharpness:</strong> 90.72 -> 88.11</div>
+                <div><strong>SSIM:</strong> 0.6548</div>
+                <div><strong>Match:</strong> True -> False</div>
+                <div><strong>Identity:</strong> -</div>
+              </div>
+            </div>
+            
+    </section>
+  </div>
+</body>
+</html>

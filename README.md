@@ -1,102 +1,128 @@
-# Low-Resolution CCTV Face Enhancement
-**Sentio Mind · POC Assignment · Project 4**
+# Sentio POC Face Enhancement
 
-GitHub: https://github.com/Sentiodirector/sentio-poc-face-enhancement.git
-Branch: FirstName_LastName_RollNumber
+This project enhances low-resolution CCTV face crops using a CPU-only classical computer vision pipeline. It extracts unique face crops from a video, upsamples and sharpens them to `240x240`, then generates a comparison report and evaluation metrics.
 
----
+## What The Project Does
 
-## Why This Exists
+The repository has two main scripts:
 
-School CCTV cameras are mounted high and use cheap lenses. When Sentio Mind crops a face from that footage it is often 12 to 80 pixels wide. At that size DeepFace emotion analysis gives garbage, face_recognition matching fails most of the time, and the profile photos shown to staff look like blurry blobs. No deep learning super-resolution models allowed — this has to run on CPU in under 30 seconds for 100 faces.
+1. `extract.py`
+   Extracts up to 100 unique face crops from a source video into `raw_faces/`.
+2. `solution.py`
+   Enhances every face in `raw_faces/`, saves outputs to `enhanced_faces/`, generates `enhancement_report.html`, and writes `evaluation_metrics.json`.
 
----
+Reference images in `reference_identities/` are used for evaluation only.
 
-## What You Receive
+## Project Structure
 
-```
-p4_face_enhancement/
+```text
+sentio-poc-face-enhancement/
+├── Demo_video.mov
+├── extract.py
+├── solution.py
+├── requirements.txt
 ├── raw_faces/
-│   ├── face_001.jpg        ← tiny CCTV face crops, typically 12–80px wide
-│   └── ...                 ← download from dataset link
+├── enhanced_faces/
 ├── reference_identities/
-│   ├── person_A.jpg        ← clear high-res photos for evaluation only
-│   └── ...
-├── face_enhancement.py     ← your template — copy to solution.py
-├── face_enhancement.json   ← schema for evaluation_metrics.json
-└── README.md
+├── enhancement_report.html
+└── evaluation_metrics.json
 ```
 
----
+## Enhancement Pipeline
 
-## What You Must Build
+`solution.py` applies the following stages:
 
-Run `python solution.py` → it must produce:
+1. Denoising with `cv2.fastNlMeansDenoisingColored`
+2. CLAHE enhancement on the LAB luminance channel
+3. Multi-step Lanczos upscaling to exactly `240x240`
+4. Region-aware sharpening using MediaPipe Face Mesh landmarks
 
-1. `enhanced_faces/` — all processed images at exactly 240×240 JPEG
-2. `enhancement_report.html` — side-by-side A/B grid: original vs enhanced
-3. `evaluation_metrics.json` — follows `face_enhancement.json` schema exactly
+The pipeline also computes:
 
-### The 4-Stage Pipeline (run in this exact order)
+- recognition accuracy before enhancement
+- recognition accuracy after enhancement
+- Laplacian sharpness before and after enhancement
+- SSIM similarity score
+- per-image metrics in `evaluation_metrics.json`
 
-**Stage 1 — Denoise**
-```python
-cv2.fastNlMeansDenoisingColored(img, h=8, hColor=8, templateWindowSize=7, searchWindowSize=21)
+## Requirements
+
+Install dependencies from the project root:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
-**Stage 2 — CLAHE**
-Convert to LAB. Apply CLAHE (clipLimit=3.5, tileGridSize=(4,4)) to L channel only. Convert back to BGR.
+Current dependencies:
 
-**Stage 3 — Multi-step upscale**
-If short side < 64px: upscale 2× LANCZOS4 → unsharp mask (sigma=1.0, strength=1.6) → upscale 2× LANCZOS4 → resize to 240×240.
-Else: direct resize to 240×240 LANCZOS4.
+- `numpy==1.26.4`
+- `opencv-contrib-python==4.13.0.92`
+- `Pillow==10.3.0`
+- `ImageHash==4.3.1`
+- `scikit-image==0.22.0`
+- `face_recognition==1.3.0`
+- `mediapipe==0.10.14`
 
-**Stage 4 — Zone sharpening**
-Use MediaPipe Face Mesh to locate eye + nose region. Apply unsharp(sigma=0.8, strength=2.0) to that region. Apply unsharp(sigma=1.2, strength=1.3) to the rest. Fallback if no face found: apply unsharp(sigma=1.0, strength=1.5) uniformly.
+## How To Run
 
-### Metrics to Report
+Run all commands from the repository root:
 
-- Face recognition match accuracy before enhancement (%)
-- Face recognition match accuracy after enhancement (%)
-- Average Laplacian variance before and after (sharpness)
-- Average SSIM improvement (scikit-image)
-
----
-
-## Hard Rules
-
-- No deep learning models (ESRGAN, GFPGAN, etc.)
-- Output must be exactly 240×240 pixels
-- 100 faces must process in under 30 seconds on CPU
-- Do not rename functions in `face_enhancement.py`
-- Do not change key names in `face_enhancement.json`
-- Python 3.9+, no Jupyter notebooks
-
-## Libraries
-
-```
-opencv-python==4.9.0   face_recognition==1.3.0   mediapipe==0.10.14
-numpy==1.26.4          Pillow==10.3.0             scikit-image==0.22.0
+```bash
+cd /data/dharmendra/Learning/sentio-poc-face-enhancement
 ```
 
----
+### 1. Extract face crops from the demo video
 
-## Submit
+`extract.py` defaults to `video.mov`, but this repository includes `Demo_video.mov`, so use:
 
-| # | File | What |
-|---|------|------|
-| 1 | `solution.py` | Working script |
-| 2 | `enhanced_faces/` | Folder with all 240×240 crops |
-| 3 | `enhancement_report.html` | A/B comparison grid |
-| 4 | `evaluation_metrics.json` | Metrics matching schema |
-| 5 | `demo.mp4` | Screen recording under 2 min |
+```bash
+SENTIO_VIDEO_PATH=Demo_video.mov python3 extract.py
+```
 
-Push to your branch only. Do not touch main.
+This script:
 
----
+- samples every 15th frame
+- detects faces with OpenCV Haar cascades
+- expands each crop for context
+- removes duplicates using perceptual hashing
+- saves up to 100 crops into `raw_faces/`
 
-## Bonus
+### 2. Run the enhancement pipeline
 
-Skip enhancement if Laplacian variance of the input is already above 80 — just resize. This saves time on inputs that are already sharp enough.
+```bash
+python3 solution.py
+```
 
-*Sentio Mind · 2026*
+This reads input images from `raw_faces/` and writes enhanced results to `enhanced_faces/`.
+
+## Generated Outputs
+
+After running `solution.py`, the following outputs are generated:
+
+- `enhanced_faces/` with enhanced `240x240` images
+- `enhancement_report.html` with side-by-side raw and enhanced comparisons
+- `evaluation_metrics.json` with summary metrics and per-face details
+
+## Current Checked-In Results
+
+The current `evaluation_metrics.json` in this repository reports:
+
+- `total_faces_processed`: `100`
+- `processing_time_sec`: `30.68`
+- `recognition_accuracy_before_pct`: `68.0`
+- `recognition_accuracy_after_pct`: `59.0`
+- `avg_sharpness_before`: `112.7`
+- `avg_sharpness_after`: `70.7`
+- `avg_ssim_improvement`: `0.691`
+
+These values come from the current checked-in dataset and can change if you rerun extraction or enhancement.
+
+## Notes
+
+- Run `solution.py` from the project root because it uses relative paths.
+- `enhancement_report.html` uses relative image paths such as `raw_faces/...` and `enhanced_faces/...`, so keep the HTML file in the project root.
+- If `mediapipe` is unavailable, the sharpening stage falls back to uniform unsharp masking.
+- If `face_recognition` is unavailable, recognition metrics will not be populated meaningfully.
+- `reference_identities/` is only for evaluation and matching, not for enhancement.
